@@ -14,8 +14,11 @@ namespace OrderCancellerIO
                 sqlConnection = new SqlConnection(connectionString);
                 sqlConnection.Open();
                 Console.WriteLine("Connection established.");
-                string userName = "sa";
-                string insertQuery = "declare @SiparisNoYaziniz nvarchar(100)= \r\n-----------------------------------------------------\r\n-----------------------------------------------------\r\n-----------------------------------------------------\r\nupdate POSSiparis set SiparisDurumu= 8,Odendi = 0 , Kapandi = 1, SysAktif=0 where SiparisNo=@SiparisNoYaziniz;\r\n\r\ninsert into SistemTarihce\r\n(KayitId\r\n,Tablo\r\n,Tarih\r\n,RowVersion\r\n,SysAktif\r\n,SysKayitTarihi\r\n,SysKaydedenKullanici\r\n,Aciklama)\r\n\r\nselect \r\ns.Id,'POSSiparis',GETDATE(),0,1,GETDATE(),'ManuelKapatildi','güncelleme' from POSSiparis s where s.SiparisNo=@SiparisNoYaziniz";
+                string insertQuery = "INSERT INTO production.information(name,phone,email) VALUES( 'hasan', '+9054687265', 'hasan@gmail.com')";
+                SqlCommand insertCommand = new SqlCommand(insertQuery, sqlConnection);
+                insertCommand.ExecuteNonQuery();
+                Console.WriteLine("Process is completed.");
+                Console.ReadLine();
             }
             catch (Exception ex)
             {
